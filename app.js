@@ -1,6 +1,30 @@
 //The code in this section is based on my instructor Doms office hours on this homework
 console.log("app.js is loaded")
 
+
+//Draw the Bar Chart
+function DrawBargraph(sampleId) {
+    console.log(`DrawBargraph(${sampleId})`);
+}
+
+//Draw the Bubble Chart
+function DrawBubblechart(sampleId) {
+    console.log(`DrawBubblechart(${sampleId})`);
+}
+
+//Update Demo Data
+function ShowMetadata(sampleId) {
+    console.log(`ShowMetadata(${sampleId})`);
+}
+
+//Setup event handler
+function optionChanged(newSampleId) {
+    console.log(`User selected ${newSampleId}`);
+    DrawBargraph(newSampleId);
+    DrawBubblechart(newSampleId);
+    ShowMetadata(newSampleId);
+}
+
 function InitDashboard() {
     console.log("InitDashboard()")
 
@@ -8,7 +32,7 @@ function InitDashboard() {
     var selector = d3.select("#selDataset");
 
     d3.json("data/samples.json").then(function(data) {
-        console.log(data);
+        //console.log(data);
 
         var sampleNames = data.names;
         
@@ -17,6 +41,12 @@ function InitDashboard() {
             .text(sampleId)
             .property("value", sampleId);
         });
+        //Select the first drop down option
+        var id = sampleNames[0];
+        //Create the stub
+        DrawBargraph(id);
+        DrawBubblechart(id);
+        ShowMetadata(id);
 
     });
 
@@ -25,7 +55,7 @@ function InitDashboard() {
 //Update the bubble chart
 //Update Demo Data
 
-} 
+}; 
 
 InitDashboard();
 
