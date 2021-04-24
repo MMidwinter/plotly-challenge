@@ -36,7 +36,6 @@ function DrawBargraph(sampleId) {
 
         Plotly.newPlot("bar", barArray, barLayout);
 
-        console.log(sample_values);
     });
 
 }
@@ -64,6 +63,7 @@ function DrawBubblechart(sampleId) {
                 size:sample_values,
                 sizeref: .2,
                 sizemode: `area`,
+                colorscale: 'Hot',
                 color: otu_ids
             },
             text: otu_labels
@@ -88,7 +88,6 @@ function DrawBubblechart(sampleId) {
 
         Plotly.newPlot("bubble", bubbleArray, bubbleLayout);
 
-        console.log(sample_values);
     });
 
 }
@@ -96,6 +95,44 @@ function DrawBubblechart(sampleId) {
 //Update Demo Data
 function ShowMetadata(sampleId) {
     console.log(`ShowMetadata(${sampleId})`);
+
+    d3.json("data/samples.json").then(data => {
+        //console.log(data);
+
+        var samples = data.samples;
+        var metaData = data.metadata;
+        var resultArray = metaData.filter(s => s.id == sampleId);
+        var result = resultArray[0];
+
+        var demoId = result.id;
+        var ethnicity = result.ethnicity;
+        var gender = result.gender;
+        var age = result.age;
+        var location = result.location;
+        var bbtype = result.bbtype;
+        var wfreq = result.wfreq;
+        
+        console.log(`
+            ID:${demoId}
+            Ethnicity:${ethnicity}
+            Gender:${gender}
+            Age:${age}
+            Location:${location}
+            bbtype:${bbtype}
+            wfreq:${wfreq} `);
+
+        var table = d3.select(`#sample-metadata`);
+        table.html("");
+        table.append(`h6`).text(`ID: ${demoId}`);
+        table.append(`h6`).text(`Ethnicity: ${ethnicity}`);
+        table.append(`h6`).text(`Gender: ${gender}`);
+        table.append(`h6`).text(`Age: ${age}`);
+        table.append(`h6`).text(`Location: ${location}`);
+        table.append(`h6`).text(`bbtype: ${bbtype}`);
+        table.append(`h6`).text(`wfreq: ${wfreq}`);
+
+    });
+
 }
 
 //Setup event handler
