@@ -112,7 +112,16 @@ function DrawGauge(sampleId) {
             type: `indicator`,
             mode: `gauge+number`,
             delta: {reference: 9},
-            gauge: {axis: {range:[0,9]}}
+            gauge: {steps: [{range: [0,1], color: `PaleGreen`},
+                    {range: [1,2], color: `MediumAquaMarine`},
+                    {range: [2,3], color: `LimeGreen`},
+                    {range: [3,4], color: `MediumSeaGreen`},
+                    {range: [4,5], color: `SeaGreen`},
+                    {range: [5,6], color: `ForestGreen`},
+                    {range: [6,7], color: `OliveDrab`},
+                    {range: [7,8], color: `Green`},
+                    {range: [8,9], color: `DarkGreen`}],
+                axis: {range:[0,9]}}
         };
 
         var gaugeArray = [gaugeData];
